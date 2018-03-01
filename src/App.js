@@ -12,20 +12,25 @@ class App extends Component {
   ],
   value:""
   }
-  handleChange(event){
+  handleChange=(event)=>{
     this.setState({value: event.target.value})
   }
   render() {
+    const {lidi,value} = this.state
+    const filterPeople = lidi.filter(value=>value.name.includes(this.state.value)||
+                                           value.Surname.includes(this.state.value))
     return(
 <form className='App'>
 <input type="text" value={this.state.value} onChange={this.handleChange} />
 <table className="App-table"><th>Name</th><th>Surname</th>
-  {this.state.lidi.map((human)=>
+  {filterPeople.map((human)=>
     <tr><td>{human.name}</td><td>{human.Surname}</td></tr>
   )
   }
+
 </table>
 </form>
+
    );
   }
 }
