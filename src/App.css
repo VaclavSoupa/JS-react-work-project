@@ -21,7 +21,22 @@
 .App-intro {
   font-size: large;
 }
+.App-table {
+  
+border: 3px solid black;
+margin: auto;
+}
+table, th, td {
+  border-collapse: collapse;
+}
+td{
+  border: 1px solid black;
+  padding: 2px;
+}
+th{
+  background-color: red;
 
+}
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
