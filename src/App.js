@@ -18,6 +18,7 @@ class App extends Component {
     searchValue: ""
   };
 
+
   handleCreateRow = () => {
     const { lidi } = this.state;
     this.setState({
@@ -39,7 +40,7 @@ class App extends Component {
     this.setState({ searchValue: event.target.value });
   };
 
-  handleChangeLidi = (event, index, type) => {
+  handleAddLidi = (event, index, type) => {
     const { lidi } = this.state;
     this.setState({
       lidi: [
@@ -51,6 +52,13 @@ class App extends Component {
         ...lidi.slice(index + 1)
       ]
     });
+  };
+
+  handleRemoveLidi(index)
+  {
+    const lidi = this.state.lidi;
+    lidi.splice(index, 1);
+    this.setState({lidi});
   };
 
   render() {
@@ -98,7 +106,7 @@ class App extends Component {
                       type="text"
                       value={human.name}
                       onChange={event =>
-                        this.handleChangeLidi(event, index, "name")
+                        this.handleAddLidi(event, index, "name")
                       }
                     />
                   </td>
@@ -108,9 +116,19 @@ class App extends Component {
                       type="textField"
                       value={human.surname}
                       onChange={event =>
-                        this.handleChangeLidi(event, index, "surname")
+                        this.handleAddLidi(event, index, "surname")
                       }
                     />
+                  </td>
+                  <td>
+                  <input
+                    className="form-control"
+                    type="button"
+                    value="REMOVE"
+                    onClick= {event =>
+                      (this.handleRemoveLidi(index))
+                    }
+                  />
                   </td>
                 </tr>
               ))}
