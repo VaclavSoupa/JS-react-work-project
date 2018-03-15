@@ -1,6 +1,18 @@
 //library imports
 import React, { Component } from "react";
+import Modal from 'react-modal';
 import "./App.css";
+
+const customStyles = {
+  content : {
+    top                   : '50%',
+    left                  : '50%',
+    right                 : 'auto',
+    bottom                : 'auto',
+    marginRight           : '-50%',
+    transform             : 'translate(-50%, -50%)'
+  }
+};
 
 const humanDefinition = {
   name: "",
@@ -15,31 +27,31 @@ class App extends Component {
       { name: "Tomáš", surname: "Fejtek" },
       { name: "Lukáš", surname: "Gryč" }
     ],
-    searchValue: ""
+    searchValue: "",
+    isShowingModal: false
   };
 
-
+  handleClick = () => this.setState({isShowingModal: true})
+  handleClose = () => this.setState({isShowingModal: false})
   handleCreateRow = () => {
     const { lidi } = this.state;
     this.setState({
       lidi: [...lidi, { ...humanDefinition }]
     });
   };
-  /*  handleCreateCol = ()
-  => {
-  const {lidi} = this.state
-    this.setState({
-      value: "",
-      lidi:[
-
-      ]
-    })
-  }*/
+   handleCreateCol (event){
+   var newArray = this.state.arr.slice();
+     newArray.push("new value");
+     this.setState({arr:newArray})
+  }
 
   handleChangeSearch = event => {
     this.setState({ searchValue: event.target.value });
   };
-
+  afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    this.subtitle.style.color = '#f00';
+  }
   handleAddLidi = (event, index, type) => {
     const { lidi } = this.state;
     this.setState({
@@ -54,12 +66,11 @@ class App extends Component {
     });
   };
 
-  handleRemoveLidi(index)
-  {
+  handleRemoveLidi(index) {
     const lidi = this.state.lidi;
     lidi.splice(index, 1);
-    this.setState({lidi});
-  };
+    this.setState({ lidi });
+  }
 
   render() {
     const { lidi, searchValue } = this.state;
@@ -70,30 +81,46 @@ class App extends Component {
 
     return (
       <div>
-        <form className="App">
-          {/*<input type="Button" value="ADD" onClick={this.handleCreateCol}/>*/}
+      <div>
+      <Modal open={this.state.isShowingModal} onAfterOpen={this.afterOpenModal} onRequestClose={this.closeModal} contentLabel="Example Modal" style={this.customStyles}>
 
-          <div class="input-group">
-            <span class="input-group-addon">Search:</span>
+      <input
+        className="form-control"
+        type="text"
+        onChange={event => this.handleChangeSearch(event)}
+      />
+        </Modal>
+        </div>
+        <form className="App">
+          <div className="input-group">
+            <span className="input-group-addon">Search:</span>
             <input
               className="form-control"
               type="text"
               value={this.state.searchValue}
               onChange={event => this.handleChangeSearch(event)}
             />
-            <span class="input-group-btn">
+            <span className="input-group-btn">
               <button
                 className="btn btn-secondary"
                 type="button"
                 value="ADD"
                 onClick={this.handleCreateRow}
               >
-                Add
+                Add ROW
+              </button>
+              <button
+                className="btn btn-secondary"
+                type="button"
+                value="ADD"
+                onClick={this.isShowingModal}
+              >
+                Add COL
               </button>
             </span>
           </div>
           <table className="table table-striped">
-            <thead>
+           <thead>
               <th>Name</th>
               <th>Surname</th>
             </thead>
@@ -121,14 +148,12 @@ class App extends Component {
                     />
                   </td>
                   <td>
-                  <input
-                    className="form-control"
-                    type="button"
-                    value="REMOVE"
-                    onClick= {event =>
-                      (this.handleRemoveLidi(index))
-                    }
-                  />
+                    <input
+                      className="form-control"
+                      type="button"
+                      value="REMOVE"
+                      onClick={event => this.handleRemoveLidi(index)}
+                    />
                   </td>
                 </tr>
               ))}
