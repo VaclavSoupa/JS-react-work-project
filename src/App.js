@@ -121,8 +121,10 @@ class App extends Component {
           </div>
           <table className="table table-striped">
            <thead>
+           <tr>
               <th>Name</th>
               <th>Surname</th>
+              </tr>
             </thead>
             <tbody>
               {filterPeople.map((human, index) => (
