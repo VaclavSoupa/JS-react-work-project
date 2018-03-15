@@ -1,19 +1,18 @@
 //library imports
 import React, { Component } from "react";
-import Modal from 'react-modal';
+import Modal from "react-modal";
 import "./App.css";
 
 const customStyles = {
-  content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)'
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)"
   }
 };
-
 const humanDefinition = {
   name: "",
   surname: ""
@@ -31,18 +30,18 @@ class App extends Component {
     isShowingModal: false
   };
 
-  handleClick = () => this.setState({isShowingModal: true})
-  handleClose = () => this.setState({isShowingModal: false})
+  handleClick = () => this.setState({ isShowingModal: true });
+  handleClose = () => this.setState({ isShowingModal: false });
   handleCreateRow = () => {
     const { lidi } = this.state;
     this.setState({
       lidi: [...lidi, { ...humanDefinition }]
     });
   };
-   handleCreateCol (event){
-   var newArray = this.state.arr.slice();
-     newArray.push("new value");
-     this.setState({arr:newArray})
+  handleCreateCol(event) {
+    var newArray = this.state.arr.slice();
+    newArray.push("new value");
+    this.setState({ arr: newArray });
   }
 
   handleChangeSearch = event => {
@@ -50,7 +49,7 @@ class App extends Component {
   };
   afterOpenModal() {
     // references are now sync'd and can be accessed.
-    this.subtitle.style.color = '#f00';
+    this.subtitle.style.color = "#f00";
   }
   handleAddLidi = (event, index, type) => {
     const { lidi } = this.state;
@@ -81,15 +80,36 @@ class App extends Component {
 
     return (
       <div>
-      <div>
-      <Modal open={this.state.isShowingModal} onAfterOpen={this.afterOpenModal} onRequestClose={this.closeModal} contentLabel="Example Modal" style={this.customStyles}>
-
-      <input
-        className="form-control"
-        type="text"
-        onChange={event => this.handleChangeSearch(event)}
-      />
-        </Modal>
+        <div>
+          <Modal
+            isOpen={this.state.isShowingModal}
+            onRequestClose={this.closeModal}
+            style={customStyles}
+            shouldCloseOnOverlayClick={true}
+            onRequestClose={this.handleClose}
+            contentLabel="Example Modal"
+            class="modal-dialog"
+          ><div class="modal-header">
+          <h4 class="modal-title">Parametr name:</h4>
+            <button type="button" className="close" onClick={this.handleClose}>&times;</button>
+            </div>
+            <form className="form-inline">
+              <div>
+                <input
+                  className="form-control mb-2 mr-sm-2 mb-sm-0"
+                  type="text"
+                />
+                <button
+                  className="btn btn-primary"
+                  type="button"
+                  value="ADD"
+                  onClick={this.isShowingModal}
+                >
+                  Add
+                </button>
+              </div>
+            </form>
+          </Modal>
         </div>
         <form className="App">
           <div className="input-group">
@@ -102,7 +122,7 @@ class App extends Component {
             />
             <span className="input-group-btn">
               <button
-                className="btn btn-secondary"
+                className="btn btn-warning"
                 type="button"
                 value="ADD"
                 onClick={this.handleCreateRow}
@@ -110,20 +130,20 @@ class App extends Component {
                 Add ROW
               </button>
               <button
-                className="btn btn-secondary"
+                className="btn btn-danger"
                 type="button"
                 value="ADD"
-                onClick={this.isShowingModal}
+                onClick={this.handleClick}
               >
                 Add COL
               </button>
             </span>
           </div>
           <table className="table table-striped">
-           <thead>
-           <tr>
-              <th>Name</th>
-              <th>Surname</th>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Surname</th>
               </tr>
             </thead>
             <tbody>
