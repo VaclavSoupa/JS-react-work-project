@@ -19,6 +19,7 @@ const humanDefinition = {
   name: "",
   surname: ""
 };
+
 //Class extending Component
 class App extends Component {
   //creating state
@@ -34,8 +35,9 @@ class App extends Component {
     parametrName: ""
   };
   //Modal function on/off
-  handleClick = () => this.setState({ isShowingModal: true });
-  handleClose = () => this.setState({ isShowingModal: false });
+  handleModalShow = () => this.setState({ isShowingModal: true });
+  handleModalClose = () => this.setState({ isShowingModal: false });
+
   //Button ADD row function
   handleCreateRow = () => {
     const { lidi } = this.state;
@@ -43,20 +45,22 @@ class App extends Component {
       lidi: [...lidi, { ...humanDefinition }]
     });
   };
-  //Button ADD COL function
-  handleCreateCol(event) {
-    var newArray = this.state.arr.slice();
-    newArray.push(event.target.value);
-    this.setState({ arr: newArray });
-  }
+
   handleChange = event =>{
     this.setState({parametrName: event.target.value})
-  }
+  };
+
   //Search function
   handleChangeSearch = event => {
     this.setState({ searchValue: event.target.value });
   };
-  //
+
+    /**
+     * Edits cell value in lidi array
+     * @param event event
+     * @param index index position in lidi
+     * @param type type of key
+     */
   handleEditCell = (event, index, type) => {
     const { lidi } = this.state;
     this.setState({
@@ -78,7 +82,7 @@ class App extends Component {
   }
   //Render function all output is here
   render() {
-    const { lidi, searchValue, parametrName } = this.state;
+    const { lidi, searchValue } = this.state;
     const filterPeople = lidi.filter(
       value =>
         value.name.includes(searchValue) || value.surname.includes(searchValue)
@@ -91,16 +95,15 @@ class App extends Component {
             isOpen={this.state.isShowingModal}
             style={customStyles}
             shouldCloseOnOverlayClick={true}
-            onRequestClose={this.handleClose}
+            onRequestClose={this.handleModalClose}
 
           >
-            <div class="modal-header">
-              <h4 class="modal-title">Parametr name:</h4>
+            <div className="modal-header">
+              <h4 className="modal-title">Parametr name:</h4>
               <button
                 type="button"
                 className="close"
-                onClick={this.handleClose}
-
+                onClick={this.handleModalClose}
               >
                 &times;
               </button>
@@ -117,8 +120,9 @@ class App extends Component {
                   className="btn btn-primary"
                   type="button"
                   value={this.state.parametrName}
-                  onClick={this.handleCreateCol, this.handleClose}
-
+                  onClick={() => {
+                      this.handleModalClose();
+                  }}
                 >
                   Add
                 </button>
@@ -148,7 +152,7 @@ class App extends Component {
                 className="btn btn-danger"
                 type="button"
                 value="ADD"
-                onClick={this.handleClick}
+                onClick={this.handleModalShow}
               >
                 Add COL
               </button>
