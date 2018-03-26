@@ -57,7 +57,7 @@ class App extends Component {
     this.setState({ searchValue: event.target.value });
   };
   //
-  handleAddLidi = (event, index, type) => {
+  handleEditCell = (event, index, type) => {
     const { lidi } = this.state;
     this.setState({
       lidi: [
@@ -170,7 +170,7 @@ class App extends Component {
                       type="text"
                       value={human.name}
                       onChange={event =>
-                        this.handleAddLidi(event, index, "name")
+                        this.handleEditCell(event, index, "name")
                       }
                     />
                   </td>
@@ -180,7 +180,7 @@ class App extends Component {
                       type="textField"
                       value={human.surname}
                       onChange={event =>
-                        this.handleAddLidi(event, index, "surname")
+                        this.handleEditCell(event, index, "surname")
                       }
                     />
                   </td>
