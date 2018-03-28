@@ -1,7 +1,7 @@
 //library imports
 import React, { Component } from "react";
 import Modal from "react-modal";
-import "./App.css";
+//import "./App.css";
 
 //Modal CSS
 const customStyles = {
@@ -43,26 +43,20 @@ class App extends Component {
       lidi: [...lidi, { ...humanDefinition }]
     });
   };
-  //Button ADD COL function
-  handleCreateCol(event) {
-    var newArray = this.state.arr.slice();
-    newArray.push(event.target.value);
-    this.setState({ arr: newArray });
-  }
-  handleChange = event =>{
-    this.setState({parametrName: event.target.value})
-  }
-  //Search function
+  handleChange = event => {
+    this.setState({ parametrName: event.target.value });
+  };
+  //
   handleChangeSearch = event => {
     this.setState({ searchValue: event.target.value });
   };
-  //
-  handleAddLidi = (event, index, type) => {
+  //Every time item is edit this happens
+  handleEditItem = (event, index, type) => {
     const { lidi } = this.state;
     this.setState({
       lidi: [
         ...lidi.slice(0, index),
-       {
+        {
           ...lidi[index],
           [type]: event.target.value
         },
@@ -92,7 +86,6 @@ class App extends Component {
             style={customStyles}
             shouldCloseOnOverlayClick={true}
             onRequestClose={this.handleClose}
-
           >
             <div class="modal-header">
               <h4 class="modal-title">Parametr name:</h4>
@@ -100,7 +93,6 @@ class App extends Component {
                 type="button"
                 className="close"
                 onClick={this.handleClose}
-
               >
                 &times;
               </button>
@@ -117,8 +109,7 @@ class App extends Component {
                   className="btn btn-primary"
                   type="button"
                   value={this.state.parametrName}
-                  onClick={this.handleCreateCol, this.handleClose}
-
+                  onClick={(this.handleCreateCol, this.handleClose)}
                 >
                   Add
                 </button>
@@ -150,7 +141,7 @@ class App extends Component {
                 value="ADD"
                 onClick={this.handleClick}
               >
-                Add COL
+                Modal Window
               </button>
             </span>
           </div>
@@ -169,8 +160,9 @@ class App extends Component {
                       className="form-control"
                       type="text"
                       value={human.name}
+                      disabled={this.state.searchValue}
                       onChange={event =>
-                        this.handleAddLidi(event, index, "name")
+                        this.handleEditItem(event, index, "name")
                       }
                     />
                   </td>
@@ -179,8 +171,9 @@ class App extends Component {
                       className="form-control"
                       type="textField"
                       value={human.surname}
+                      disabled={this.state.searchValue}
                       onChange={event =>
-                        this.handleAddLidi(event, index, "surname")
+                        this.handleEditItem(event, index, "surname")
                       }
                     />
                   </td>
