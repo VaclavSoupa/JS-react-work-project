@@ -1,7 +1,7 @@
 //library imports
 import React, { Component } from "react";
 import Modal from "react-modal";
-import "./App.css";
+//import "./App.css";
 
 //Modal CSS
 const customStyles = {
@@ -45,6 +45,16 @@ class App extends Component {
       lidi: [...lidi, { ...humanDefinition }]
     });
   };
+  handleChange = event => {
+    this.setState({ parametrName: event.target.value });
+  };
+  //
+  handleChangeSearch = event => {
+    this.setState({ searchValue: event.target.value });
+  };
+  //Every time item is edit this happens
+  handleEditItem = (event, index, type) => {
+=======
 
   handleChange = event =>{
     this.setState({parametrName: event.target.value})
@@ -55,18 +65,12 @@ class App extends Component {
     this.setState({ searchValue: event.target.value });
   };
 
-    /**
-     * Edits cell value in lidi array
-     * @param event event
-     * @param index index position in lidi
-     * @param type type of key
-     */
   handleEditCell = (event, index, type) => {
     const { lidi } = this.state;
     this.setState({
       lidi: [
         ...lidi.slice(0, index),
-       {
+        {
           ...lidi[index],
           [type]: event.target.value
         },
@@ -94,14 +98,17 @@ class App extends Component {
             isOpen={this.state.isShowingModal}
             style={customStyles}
             shouldCloseOnOverlayClick={true}
+            onRequestClose={this.handleClose}
             onRequestClose={this.handleModalClose}
-
           >
             <div className="modal-header">
               <h4 className="modal-title">Parametr name:</h4>
               <button
                 type="button"
                 className="close"
+<<<<<<< HEAD
+                onClick={this.handleClose}
+=======
                 onClick={this.handleModalClose}
               >
                 &times;
@@ -119,6 +126,9 @@ class App extends Component {
                   className="btn btn-primary"
                   type="button"
                   value={this.state.parametrName}
+<<<<<<< HEAD
+                  onClick={(this.handleCreateCol, this.handleClose)}
+=======
                   onClick={() => {
                       this.handleModalClose();
                   }}
@@ -153,7 +163,7 @@ class App extends Component {
                 value="ADD"
                 onClick={this.handleModalShow}
               >
-                Add COL
+                Modal Window
               </button>
             </span>
           </div>
@@ -174,7 +184,11 @@ class App extends Component {
                       value={human.name}
                       disabled={this.state.searchValue}
                       onChange={event =>
+
+                        this.handleEditItem(event, index, "name")
+
                         this.handleEditCell(event, index, "name")
+
                       }
                     />
                   </td>
@@ -185,6 +199,7 @@ class App extends Component {
                       value={human.surname}
                       disabled={this.state.searchValue}
                       onChange={event =>
+                        this.handleEditItem(event, index, "surname")
                         this.handleEditCell(event, index, "surname")
                       }
                     />
