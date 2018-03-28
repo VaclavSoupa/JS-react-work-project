@@ -52,10 +52,6 @@ class App extends Component {
   handleChangeSearch = event => {
     this.setState({ searchValue: event.target.value });
   };
-  //Every time item is edit this happens
-  handleEditItem = (event, index, type) => {
-=======
-
   handleChange = event =>{
     this.setState({parametrName: event.target.value})
   };
@@ -65,7 +61,7 @@ class App extends Component {
     this.setState({ searchValue: event.target.value });
   };
 
-  handleEditCell = (event, index, type) => {
+  handleEditItem = (event, index, type) => {
     const { lidi } = this.state;
     this.setState({
       lidi: [
@@ -106,9 +102,7 @@ class App extends Component {
               <button
                 type="button"
                 className="close"
-<<<<<<< HEAD
                 onClick={this.handleClose}
-=======
                 onClick={this.handleModalClose}
               >
                 &times;
@@ -126,9 +120,7 @@ class App extends Component {
                   className="btn btn-primary"
                   type="button"
                   value={this.state.parametrName}
-<<<<<<< HEAD
                   onClick={(this.handleCreateCol, this.handleClose)}
-=======
                   onClick={() => {
                       this.handleModalClose();
                   }}
@@ -184,11 +176,7 @@ class App extends Component {
                       value={human.name}
                       disabled={this.state.searchValue}
                       onChange={event =>
-
                         this.handleEditItem(event, index, "name")
-
-                        this.handleEditCell(event, index, "name")
-
                       }
                     />
                   </td>
@@ -200,7 +188,6 @@ class App extends Component {
                       disabled={this.state.searchValue}
                       onChange={event =>
                         this.handleEditItem(event, index, "surname")
-                        this.handleEditCell(event, index, "surname")
                       }
                     />
                   </td>
