@@ -45,7 +45,6 @@ class App extends Component {
       lidi: [...lidi, { ...humanDefinition }]
     });
   };
-<<<<<<< HEAD
   handleChange = event => {
     this.setState({ parametrName: event.target.value });
   };
@@ -66,14 +65,7 @@ class App extends Component {
     this.setState({ searchValue: event.target.value });
   };
 
-    /**
-     * Edits cell value in lidi array
-     * @param event event
-     * @param index index position in lidi
-     * @param type type of key
-     */
   handleEditCell = (event, index, type) => {
->>>>>>> 14a9da5be6e948317746dccd8a08a997f2b4dd8f
     const { lidi } = this.state;
     this.setState({
       lidi: [
@@ -107,12 +99,8 @@ class App extends Component {
             isOpen={this.state.isShowingModal}
             style={customStyles}
             shouldCloseOnOverlayClick={true}
-<<<<<<< HEAD
             onRequestClose={this.handleClose}
-=======
             onRequestClose={this.handleModalClose}
-
->>>>>>> 14a9da5be6e948317746dccd8a08a997f2b4dd8f
           >
             <div className="modal-header">
               <h4 className="modal-title">Parametr name:</h4>
@@ -123,7 +111,6 @@ class App extends Component {
                 onClick={this.handleClose}
 =======
                 onClick={this.handleModalClose}
->>>>>>> 14a9da5be6e948317746dccd8a08a997f2b4dd8f
               >
                 &times;
               </button>
@@ -146,7 +133,6 @@ class App extends Component {
                   onClick={() => {
                       this.handleModalClose();
                   }}
->>>>>>> 14a9da5be6e948317746dccd8a08a997f2b4dd8f
                 >
                   Add
                 </button>
@@ -199,11 +185,11 @@ class App extends Component {
                       value={human.name}
                       disabled={this.state.searchValue}
                       onChange={event =>
-<<<<<<< HEAD
+
                         this.handleEditItem(event, index, "name")
-=======
+
                         this.handleEditCell(event, index, "name")
->>>>>>> 14a9da5be6e948317746dccd8a08a997f2b4dd8f
+
                       }
                     />
                   </td>
@@ -214,11 +200,8 @@ class App extends Component {
                       value={human.surname}
                       disabled={this.state.searchValue}
                       onChange={event =>
-<<<<<<< HEAD
                         this.handleEditItem(event, index, "surname")
-=======
                         this.handleEditCell(event, index, "surname")
->>>>>>> 14a9da5be6e948317746dccd8a08a997f2b4dd8f
                       }
                     />
                   </td>
