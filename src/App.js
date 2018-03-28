@@ -84,8 +84,7 @@ class App extends Component {
   render() {
     const { lidi, searchValue } = this.state;
     const filterPeople = lidi.filter(
-      value =>
-        value.name.includes(searchValue) || value.surname.includes(searchValue)
+    value => value.name.includes(searchValue) || value.surname.includes(searchValue)
     );
     // HTML in return of render function
     return (
@@ -167,12 +166,13 @@ class App extends Component {
             </thead>
             <tbody>
               {filterPeople.map((human, index) => (
-                <tr>
+                <tr key={index}>
                   <td>
                     <input
                       className="form-control"
                       type="text"
                       value={human.name}
+                      disabled={this.state.searchValue}
                       onChange={event =>
                         this.handleEditCell(event, index, "name")
                       }
@@ -183,6 +183,7 @@ class App extends Component {
                       className="form-control"
                       type="textField"
                       value={human.surname}
+                      disabled={this.state.searchValue}
                       onChange={event =>
                         this.handleEditCell(event, index, "surname")
                       }
